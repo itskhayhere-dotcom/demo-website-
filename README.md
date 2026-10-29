@@ -7,11 +7,15 @@ Scroll-driven video page. The background video plays forward and backward as you
 - `assets/mido-scroll.mp4` - background video (muted, short keyframe gaps so scrubbing stays smooth)
 
 ## Run locally
-Use a local server, because browsers can block video seeking from `file://`:
+The video needs a server that supports HTTP Range requests, or the browser cannot seek and the video will not move.
+Use one of these:
 
-    python3 -m http.server 8000
+    npx http-server -p 8000
 
-Then open http://localhost:8000
+or the VS Code "Live Server" extension. Then open http://localhost:8000
+
+Do NOT use `python3 -m http.server`. It has no Range support, so the video will not play on scroll.
+Double-clicking `index.html` may also fail in some browsers.
 
 ## Deploy with GitHub Pages
 1. Push this folder to a GitHub repo.
