@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>MIDO · Scroll Experience</title>
+<meta name="description" content="A scroll-driven Mido watch experience. Scroll to move through the video.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--ink:#f6f1e7;--gold:#d2b57a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:#07090c;color:var(--ink);font:300 clamp(15px,1.2vw+11px,17px)/1.75 Jost,system-ui,sans-serif;overflow-x:hidden}
+#bg{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3}
+.veil{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(7,9,12,.7),rgba(7,9,12,.15) 30%,rgba(7,9,12,.2) 55%,rgba(7,9,12,.85))}
+.grain{position:fixed;inset:0;z-index:-1;box-shadow:inset 0 0 20vmin rgba(0,0,0,.65)}
+#bar{position:fixed;left:0;top:0;height:2px;width:0;background:var(--gold);z-index:9}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:8;display:flex;justify-content:space-between;align-items:center;padding:22px max(6vw,20px)}
+nav b{font:400 clamp(22px,5vw,30px) Cormorant Garamond,serif;letter-spacing:.55em;margin-right:-.55em}
+nav span{font-size:10px;letter-spacing:.4em;text-transform:uppercase;opacity:.75}
+#dots{position:fixed;right:max(3vw,12px);top:50%;transform:translateY(-50%);z-index:8;display:flex;flex-direction:column;gap:14px}
+#dots i{width:5px;height:5px;border-radius:50%;border:1px solid var(--gold);transition:.4s}
+#dots i.on{background:var(--gold);transform:scale(1.5)}
+#no{position:fixed;left:max(6vw,20px);bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:8;font:300 13px Cormorant Garamond,serif;letter-spacing:.3em;color:var(--gold)}
+section{min-height:100svh;display:flex;align-items:center;padding:14svh max(9vw,26px);perspective:1100px}
+section.r{justify-content:flex-end;text-align:right}
+.t{max-width:540px;will-change:transform,opacity;transform-style:preserve-3d}
+.k{display:block;font-size:10.5px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.k:after{content:"";display:block;width:44px;height:1px;background:var(--gold);margin-top:16px}
+.r .k:after{margin-left:auto}
+h1,h2{font:300 clamp(46px,11vw,104px)/.98 Cormorant Garamond,serif;letter-spacing:-.01em}
+h2{font-size:clamp(38px,8vw,68px);line-height:1.04}
+em{font-style:italic;color:var(--gold)}
+p{margin-top:20px;opacity:.88;max-width:44ch}.r p{margin-left:auto}
+.hero{justify-content:center;text-align:center}.hero .k:after{margin:16px auto 0}.hero p{margin-inline:auto}
+.btn{display:inline-block;margin-top:30px;padding:16px 34px;border:1px solid var(--gold);color:var(--ink);text-decoration:none;font-size:11px;letter-spacing:.35em;text-transform:uppercase;background:rgba(7,9,12,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:.3s}
+.btn:hover,.btn:active{background:var(--gold);color:#07090c}
+@media(max-width:700px){
+nav span{display:none}
+section,section.r{align-items:flex-end;justify-content:flex-start;text-align:left;padding-bottom:16svh}
+.r .k:after{margin-left:0}.r p{margin-left:0}
+.hero{align-items:center;justify-content:center;text-align:center;padding-bottom:14svh}
+.t{padding-right:18px}.btn{width:100%;text-align:center}
+}
+</style></head><body>
+<div id="bar"></div><video id="bg" src="assets/mido-scroll.mp4" muted playsinline preload="auto"></video><div class="veil"></div><div class="grain"></div>
+<nav><b>MIDO</b><span>Swiss Made · Since 1918</span></nav>
+<div id="dots"><i></i><i></i><i></i><i></i><i></i></div><div id="no">01 / 05</div>
+<section class="hero"><div class="t"><span class="k">Mido Swiss Watches</span><h1>Architecture<br><em>in motion</em></h1><p>Scroll to move through time.</p></div></section>
+<section><div class="t"><span class="k">01 · Multifort</span><h2>Built to be <em>worn</em></h2><p>Sapphire crystal, an 80-hour power reserve and a Swiss silhouette inspired by architecture.</p></div></section>
+<section class="r"><div class="t"><span class="k">02 · Commander</span><h2>The Rolling <em>Wave</em></h2><p>Shaped after the Sydney Opera House, every case and dial catches the light as you move.</p></div></section>
+<section><div class="t"><span class="k">03 · Ocean Star</span><h2>Depth, <em>refined</em></h2><p>Water resistant and bold, composed from the pier to the boardroom.</p></div></section>
+<section class="r"><div class="t"><span class="k">04 · Baroncelli</span><h2>Quiet <em>elegance</em></h2><p>Slim lines, fine texture and a dial that rewards a second look.</p><a class="btn" href="#">Discover the collection</a></div></section>
+<script>
+(function(){
+var v=document.getElementById('bg'),bar=document.getElementById('bar'),no=document.getElementById('no'),
+dots=[].slice.call(document.querySelectorAll('#dots i')),secs=[].slice.call(document.querySelectorAll('section')),
+els=secs.map(function(s){return s.querySelector('.t')}),dur=0,prog=0,cur=0,last=-1;
+v.addEventListener('loadedmetadata',function(){dur=v.duration;v.pause()});
+v.addEventListener('canplay',function(){v.pause()});
+function upd(){var h=document.documentElement.scrollHeight-innerHeight;prog=h>0?Math.min(1,Math.max(0,scrollY/h)):0;bar.style.width=prog*100+'%'}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
+function tick(){
+cur+=(prog-cur)*.08;
+if(dur){var t=cur*(dur-.05);if(Math.abs(v.currentTime-t)>.03)try{v.currentTime=t}catch(e){}}
+var vh=innerHeight,best=0,bd=9;
+els.forEach(function(e,i){var r=secs[i].getBoundingClientRect(),p=(r.top+r.height/2-vh/2)/vh,a=Math.max(0,1-Math.abs(p)*1.5),d=i%2?1:-1;
+if(Math.abs(p)<bd){bd=Math.abs(p);best=i}
+e.style.opacity=a;e.style.transform='translate3d(0,'+(p*70)+'px,'+(-Math.abs(p)*220)+'px) rotateX('+(p*-14)+'deg) rotateY('+(p*22*d)+'deg)'});
+if(best!==last){last=best;dots.forEach(function(x,i){x.className=i==best?'on':''});no.textContent='0'+(best+1)+' / 05'}
+requestAnimationFrame(tick)}
+upd();tick();
+function prime(){var p=v.play();if(p&&p.then)p.then(function(){v.pause()}).catch(function(){});removeEventListener('touchstart',prime);removeEventListener('pointerdown',prime)}
+addEventListener('touchstart',prime,{passive:true});addEventListener('pointerdown',prime);
+})();
+</script></body></html>
